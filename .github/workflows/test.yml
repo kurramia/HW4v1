@@ -29,3 +29,9 @@ jobs:
         with:
           name: allure-report
           path: target/allure-report
+          
+      - name: Publish to Allure Server
+        run: |
+          curl -X POST "https://your-allure-server/api/report" \
+               -H "Content-Type: multipart/form-data" \
+               -F "file=@target/allure-report.zip"
