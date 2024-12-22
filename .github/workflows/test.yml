@@ -1,0 +1,31 @@
+name: Test and Report
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Проверяем код из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      # Устанавливаем Java
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          
+      # Выполняем тесты и создаем отчет
+      - name: Run tests and create report
+        run: |
+          mvn clean test
+          ./allure/bin/allure generate target/allure-results --clean -o target/allure-report
+          
+      # Загружаем артефакты
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report
+          path: target/allure-report
