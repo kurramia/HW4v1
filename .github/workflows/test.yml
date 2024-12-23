@@ -1,6 +1,10 @@
 name: Test and Report
 
-on: push
+on:
+  push:
+    branches: [ main ]
+    pull_request:
+      branches: [ main ]
 
 jobs:
   build:
@@ -10,17 +14,25 @@ jobs:
       - name: "Проверка кода"
         uses: actions/checkout@v3
 
-      - name: "Запуск тестов"
-        run:
-          export DISTRIBUTION=Ubuntu 
-          mvn clean test
-        continue-on-error: true
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: adopt
           java-version: 11
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: "Запуск тестов"
+        run:
+          export DISTRIBUTION=Ubuntu 
+          mvn clean test
+        continue-on-error: true
 
       - name: "Генерация allure-report"
         uses: simple-elf/allure-report-action@master
@@ -39,14 +51,3 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: target/allure-history
 
-#
-#      - name: "Запуск тестов"
-#        run: |
-#          mvn clean test
-#          ./allure/bin/allure generate target/allure-results --clean -o target/allure-report
-#
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: allure-report
-#          path: target/allure-report
