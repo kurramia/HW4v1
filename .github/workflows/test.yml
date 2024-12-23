@@ -15,6 +15,11 @@ jobs:
         run: mvn clean test
         continue-on-error: true
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+
       - name: "Генерация allure-report"
         uses: simple-elf/allure-report-action@master
         id: allure-report
@@ -31,10 +36,7 @@ jobs:
           PERSONAL_TOKEN: ${{secrets.GITHUB_TOKEN}}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: target/allure-history
-#      - name: Set up JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: '11'
+
 #
 #      - name: "Запуск тестов"
 #        run: |
