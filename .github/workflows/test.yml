@@ -52,7 +52,7 @@ jobs:
           name: allure-report
 
       - name: Deploy Allure Report
-        uses: actions/deploy-to-github-pages@v1
+        uses: actions/github-pages@v3
         with:
           destination: gh-pages
           folder: target/allure-report
