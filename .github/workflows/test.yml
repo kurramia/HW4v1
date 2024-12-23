@@ -33,7 +33,7 @@ jobs:
 
 
       - name: Check if Allure Report exists
-        run: ls -l target/allure-report
+        run: ls -l target/
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v3

@@ -122,6 +122,7 @@
                 <version>2.11.2</version>
                 <configuration>
                     <reportVersion>2.13.8</reportVersion>
+                    <reportDirectory>target/allure-report</reportDirectory>
                 </configuration>
             </plugin>
         </plugins>
