@@ -20,48 +20,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-
-
       - name: Build with Maven
         run: mvn clean verify
 
-      - name: Generate Allure Report
-        run: mvn allure:report
-
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: allure-report
-          path: target/allure-report
-#  report:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Download Allure Report
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: allure-report
-#
-#      - name: Deploy Allure Report
-#        uses: actions/deploy-to-github-pages@v1
-#        with:
-#          destination: gh-pages
-#          folder: target/allure-report
-#      - name: "Проверка кода"
-#        uses: actions/checkout@v3
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          distribution: adopt
-#          java-version: 11
-#
 #      - name: Cache Maven packages
 #        uses: actions/cache@v3
 #        with:
@@ -69,30 +30,31 @@ jobs:
 #          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
 #          restore-keys: |
 #            ${{ runner.os }}-m2-
-#
-#      - name: "Запуск тестов"
-#        run:
-#          export DISTRIBUTION=Ubuntu
-#          mvn clean test
-#        continue-on-error: true
-#
-#      - name: Generate Allure Report
-#        run: mvn allure:report
-#
-#      - name: "Генерация allure-report"
-#        uses: simple-elf/allure-report-action@master
-#        id: allure-report
-#        with:
-#          allure_results: target/allure-results
-#          gh_pages: gh-pages
-#          allure_report: target/allure-report
-#          allure_history: target/allure-history
-#
-#      - name: "Создание ветки gh-pages содержащей allure-report"
-#        uses: peaceiris/actions-gh-pages@v3
-#        with:
-#          deploy_key: ${{secrets.ACTIONS_DEPLOY_KEY}}
-#          PERSONAL_TOKEN: ${{secrets.GITHUB_TOKEN}}
-#          PUBLISH_BRANCH: gh-pages
-#          PUBLISH_DIR: target/allure-history
+
+
+      - name: Generate Allure Report
+        run: allure generate target/allure-results --clean -o target/allure-report
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: target/allure-report
+
+  report:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Allure Report
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-report
+
+      - name: Deploy Allure Report
+        uses: actions/deploy-to-github-pages@v1
+        with:
+          destination: gh-pages
+          folder: target/allure-report
+
+
 
