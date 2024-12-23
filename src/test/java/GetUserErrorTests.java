@@ -6,8 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.empty;
-
+import static org.hamcrest.Matchers.equalTo;
 
 @Feature("Функция поиска пользователей")
 public class GetUserErrorTests {
@@ -25,6 +24,6 @@ public class GetUserErrorTests {
                 .then()
                 .statusCode(404)
                 .assertThat()
-                .body(empty());
+                .body(equalTo("{}"));
     }
 }

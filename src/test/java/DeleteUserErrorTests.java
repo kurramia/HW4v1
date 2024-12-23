@@ -26,6 +26,6 @@ public class DeleteUserErrorTests {
                 .then()
                 .statusCode(204)
                 .assertThat()
-                .body("error", equalTo("No Content"));
+                .body(equalTo("{}"));
     }
 }
