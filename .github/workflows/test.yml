@@ -34,7 +34,7 @@ jobs:
           mvn clean test
         continue-on-error: true
 
-      - name: { if: always(), uses: dorny/test-results-publisher@v2, with: { file_path: target/surefire-reports/*.xml, merge_mode: replace } }
+      - name: { if: always(), run: dorny/test-results-publisher@v2, with: { file_path: target/surefire-reports/*.xml, merge_mode: replace } }
       - name: "Генерация allure-report"
         uses: simple-elf/allure-report-action@master
         id: allure-report
