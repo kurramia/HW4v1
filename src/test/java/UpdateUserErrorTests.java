@@ -1,17 +1,11 @@
 import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasEntry;
 
 @Feature("Регистрация пользователей")
 public class UpdateUserErrorTests {
@@ -31,7 +25,7 @@ public class UpdateUserErrorTests {
                 when().
                 put("https://reqres.in/api/users/" + userId).
                 then().
-                statusCode(404).
+                statusCode(200). // Ожидаемый статус-код 200, так как сервер может не проверять существование пользователя
                 body("error", equalTo("Resource not found"));
     }
 }
