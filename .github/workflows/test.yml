@@ -21,14 +21,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 11
-          cache: true
-          java-package: jdk
-          check-latest: false
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-          overwrite-settings: true
-
 
       - name: "Генерация allure-report"
         uses: simple-elf/allure-report-action@master
