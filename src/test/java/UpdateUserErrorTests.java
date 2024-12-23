@@ -19,13 +19,14 @@ public class UpdateUserErrorTests {
         String name = "morpheus";
         String job = "zion resident";
 
-        given().
-                contentType(ContentType.JSON).
-                body("{\"name\": \"" + name + "\", \"job\": \"" + job + "\"}").
-                when().
-                put("https://reqres.in/api/users/" + userId).
-                then().
-                statusCode(200). // Ожидаемый статус-код 200, так как сервер может не проверять существование пользователя
-                body("error", equalTo("Resource not found"));
+        given()
+                .contentType(ContentType.JSON)
+                .body("{\"name\": \"" + name + "\", \"job\": \"" + job + "\"}")
+                .when()
+                .put("https://reqres.in/api/users/" + userId)
+                .then()
+                .statusCode(200)
+                .assertThat() // Ожидаемый статус-код 200, так как сервер может не проверять существование пользователя
+                .body("error", equalTo("Resource not found"));
     }
 }

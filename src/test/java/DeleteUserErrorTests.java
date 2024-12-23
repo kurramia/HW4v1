@@ -2,6 +2,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +19,13 @@ public class DeleteUserErrorTests {
     @Test
     public void shouldFailDeletingNonExistentUser() {
         int userId = 9999;
-
-        given().
-                when().
-                delete("https://reqres.in/api/users/" + userId).
-                then().
-                statusCode(204).
-                body("error", equalTo("No Content"));
+        RestAssured.defaultParser = Parser.JSON;
+        given()
+                .when()
+                .delete("https://reqres.in/api/users/" + userId)
+                .then()
+                .statusCode(404)
+                .assertThat()
+                .body("error", equalTo("No Content"));
     }
 }
