@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Настройка дистрибутива
+      - name: "Настройка дистрибутива"
         env:
           DISTRIBUTION: Ubuntu
 
