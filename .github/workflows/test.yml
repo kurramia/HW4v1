@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Настройка дистрибутива
+        env:
+          DISTRIBUTION: Ubuntu
 
       - name: "Проверка кода"
         uses: actions/checkout@v3
