@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 @Feature("Функция управления пользователями")
 public class DeleteUserErrorTests {
@@ -26,6 +26,6 @@ public class DeleteUserErrorTests {
                 .then()
                 .statusCode(204)
                 .assertThat()
-                .body(equalTo("{}"));
+                .body(isEmptyOrNullString());;
     }
 }
