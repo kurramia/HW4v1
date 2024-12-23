@@ -40,7 +40,7 @@ jobs:
         if: always()
         with:
           name: allure-report
-          path: target/allure-report
+          path: target/site/allure-report
 
   report:
     needs: build
