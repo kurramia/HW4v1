@@ -23,6 +23,6 @@ public class DeleteUserErrorTests {
                 delete("https://reqres.in/api/users/" + userId).
                 then().
                 statusCode(204).
-                body("error", equalTo("Resource not found"));
+                body("error", equalTo("No Content"));
     }
 }
