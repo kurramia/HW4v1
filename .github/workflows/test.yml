@@ -34,6 +34,9 @@ jobs:
           mvn clean test
         continue-on-error: true
 
+      - name: Generate Allure Report
+        run: mvn allure:report
+
       - name: "Генерация allure-report"
         uses: simple-elf/allure-report-action@master
         id: allure-report
@@ -44,7 +47,7 @@ jobs:
           allure_history: target/allure-history
 
       - name: "Создание ветки gh-pages содержащей allure-report"
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/actions-gh-pages@v3
         with:
           deploy_key: ${{secrets.ACTIONS_DEPLOY_KEY}}
           PERSONAL_TOKEN: ${{secrets.GITHUB_TOKEN}}
