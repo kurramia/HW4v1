@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.empty;
 
 
 @Feature("Функция поиска пользователей")
@@ -25,6 +25,6 @@ public class GetUserErrorTests {
                 .then()
                 .statusCode(404)
                 .assertThat()
-                .body(isEmptyOrNullString());
+                .body(empty());
     }
 }
