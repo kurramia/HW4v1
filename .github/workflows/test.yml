@@ -52,10 +52,11 @@ jobs:
           name: allure-report
 
       - name: Deploy Allure Report
-        uses: actions/github-pages@v3
-        with:
-          destination: gh-pages
-          folder: target/allure-report
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+            PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            PUBLISH_BRANCH: gh-pages
+            PUBLISH_DIR: allure-history
 
 
 
