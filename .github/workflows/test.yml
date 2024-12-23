@@ -31,8 +31,8 @@ jobs:
 #          restore-keys: |
 #            ${{ runner.os }}-m2-
 
-      - name: Generate Allure Report
-        run: mvn allure:report
+#      - name: Generate Allure Report
+#        run: mvn allure:report
 
 #      - name: Upload Allure Report
 #        uses: actions/upload-artifact@v3
@@ -40,8 +40,18 @@ jobs:
 #        with:
 #                name: allure-report
 #                path: target/allure-report
-      - name: Check generated files
-        run: ls -la target/allure-report
+
+#      - name: Check generated files
+#        run: ls -l target/
+      - name: Check if Allure Report is generated
+        run: |
+          if [ ! -d "target/allure-report" ]; then
+            echo "Allure Report not found!"
+            exit 1
+          fi
+
+      - name: Archive Allure Report
+        run: tar -czf allure-report.tar.gz target/allure-report
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v3
@@ -58,6 +68,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: allure-report
+
+      - name: Unpack Allure Report
+        run: tar -xzf allure-report.tar.gz
 
       - name: Deploy Allure Report
         uses: peaceiris/actions-gh-pages@v3
