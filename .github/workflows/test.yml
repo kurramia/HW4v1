@@ -7,15 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Настройка дистрибутива"
-        run:
-          DISTRIBUTION: Ubuntu
-
       - name: "Проверка кода"
         uses: actions/checkout@v3
 
       - name: "Запуск тестов"
-        run: mvn clean test
+        run:
+          export DISTRIBUTION=Ubuntu 
+          mvn clean test
         continue-on-error: true
 
       - name: Set up JDK
