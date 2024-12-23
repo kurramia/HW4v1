@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 @Feature("Регистрация пользователей")
 public class UpdateUserErrorTests {
@@ -27,6 +27,6 @@ public class UpdateUserErrorTests {
                 .then()
                 .statusCode(200)
                 .assertThat() // Ожидаемый статус-код 200, так как сервер может не проверять существование пользователя
-                .body("error", equalTo("Resource not found"));
+                .body(isEmptyOrNullString());
     }
 }

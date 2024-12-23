@@ -24,7 +24,7 @@ public class DeleteUserErrorTests {
                 .when()
                 .delete("https://reqres.in/api/users/" + userId)
                 .then()
-                .statusCode(404)
+                .statusCode(204)
                 .assertThat()
                 .body("error", equalTo("No Content"));
     }

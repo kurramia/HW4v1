@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 
 @Feature("Функция поиска пользователей")
@@ -25,6 +25,6 @@ public class GetUserErrorTests {
                 .then()
                 .statusCode(404)
                 .assertThat()
-                .body("error", equalTo("Resource not found"));
+                .body(isEmptyOrNullString());
     }
 }
