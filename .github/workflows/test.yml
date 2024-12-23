@@ -39,6 +39,21 @@ jobs:
         with:
           name: allure-report
           path: ./target/allure-report
+  report:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Allure Report
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-report
+
+      - name: Deploy Allure Report
+        uses: actions/github-pages@v3
+        with:
+          destination: gh-pages
+          path: |
+            target/allure-report
 #      - name: "Проверка кода"
 #        uses: actions/checkout@v3
 #
