@@ -31,16 +31,24 @@ jobs:
 #          restore-keys: |
 #            ${{ runner.os }}-m2-
 
-
-      - name: Check generated files
-        run: ls -l target/
+      - name: Generate Allure Report
+        run: mvn allure:report
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: allure-report
-          path: target/site/allure-report
+                name: allure-report
+                path: target/allure-report
+#      - name: Check generated files
+#        run: ls -l target/
+#
+#      - name: Upload Allure Report
+#        uses: actions/upload-artifact@v3
+#        if: always()
+#        with:
+#          name: allure-report
+#          path: target/site/allure-report
 
   report:
     needs: build
@@ -52,7 +60,7 @@ jobs:
           name: allure-report
 
       - name: Deploy Allure Report
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v2
         env:
             PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             PUBLISH_BRANCH: gh-pages
