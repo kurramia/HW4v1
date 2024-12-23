@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: "Настройка дистрибутива"
-        env:
+        run:
           DISTRIBUTION: Ubuntu
 
       - name: "Проверка кода"
