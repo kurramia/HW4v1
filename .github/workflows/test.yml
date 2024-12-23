@@ -47,7 +47,7 @@ jobs:
           allure_history: target/allure-history
 
       - name: "Создание ветки gh-pages содержащей allure-report"
-        uses: actions/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{secrets.ACTIONS_DEPLOY_KEY}}
           PERSONAL_TOKEN: ${{secrets.GITHUB_TOKEN}}
