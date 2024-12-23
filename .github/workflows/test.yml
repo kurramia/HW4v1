@@ -32,15 +32,15 @@ jobs:
 #            ${{ runner.os }}-m2-
 
 
-      - name: Check if Allure Report exists
-        run: ls -l target/
+      - name: Generate Allure Report
+        run: mvn allure:report
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v3
         if: always()
         with:
-            name: allure-report
-            path: target/allure-report
+          name: allure-report
+          path: target/allure-report
 
   report:
     needs: build
