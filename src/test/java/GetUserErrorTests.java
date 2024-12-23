@@ -17,6 +17,7 @@ public class GetUserErrorTests {
 
     @DisplayName("Ошибочный тест поиска несуществующего пользователя")
     @Description("Проверка, удастся ли найти несуществующего пользователя.")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void shouldFailGettingNonExistentUser() {
         int userId = 9999;

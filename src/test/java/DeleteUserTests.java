@@ -17,6 +17,7 @@ public class DeleteUserTests {
 
     @DisplayName("Успешный тест на удаление пользователя")
     @Description("Проверка успешного удаления существующего пользователя.")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void shouldDeleteUserSuccessfully() {
         int userId = 2;

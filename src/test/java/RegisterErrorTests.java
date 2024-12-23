@@ -18,6 +18,7 @@ public class RegisterErrorTests {
 
     @DisplayName("Неудачная регистрация без проверки пароля")
     @Description("Проверка, удастся ли зарегистрироваться без ввода пароля")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void shouldFailRegistrationWithoutPassword() {
         String email = "eve.holt@reqres.in";

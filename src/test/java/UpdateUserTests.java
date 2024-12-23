@@ -18,6 +18,7 @@ public class UpdateUserTests {
 
     @DisplayName("Успешный тест обновления пользователя")
     @Description("Проверка успешного обновления существующего пользователя")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void shouldUpdateUserSuccessfully() {
         int userId = 2;

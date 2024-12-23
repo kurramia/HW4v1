@@ -17,6 +17,7 @@ public class DeleteUserErrorTests {
 
     @DisplayName("Ошибочный тест на удаление пользователя")
     @Description("Проверка, не удастся ли удалить несуществующего пользователя.")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void shouldFailDeletingNonExistentUser() {
         int userId = 9999;

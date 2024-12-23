@@ -17,6 +17,7 @@ public class GetUserTests {
 
     @DisplayName("Успешный тест поиска пользователя")
     @Description("Проверка получения данных существующего пользователя")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void shouldGetUserDetailsSuccessfully() {
         int userId = 2;

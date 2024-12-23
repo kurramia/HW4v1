@@ -16,6 +16,7 @@ import static org.hamcrest.Matchers.*;
 public class RegisterTests {
     @DisplayName("Успешный регистрационный тест")
     @Description("Проверка регистрации нового пользователя")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void shouldRegisterUserSuccessfully() {
         String email = "eve.holt@reqres.in";

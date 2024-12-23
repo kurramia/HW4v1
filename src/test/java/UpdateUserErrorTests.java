@@ -18,6 +18,7 @@ public class UpdateUserErrorTests {
 
     @DisplayName("Ошибка в обновлении пользователя")
     @Description("Проверка ошибки обновления несуществующего пользователя")
+
     @Test
     public void shouldFailUpdatingNonExistentUser() {
         int userId = 9999;
