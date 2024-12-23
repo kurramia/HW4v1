@@ -19,7 +19,9 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
+          distribution: 'adopt'
           java-version: '11'
+          cache: 'true'
 
       - name: "Генерация allure-report"
         uses: simple-elf/allure-report-action@master
