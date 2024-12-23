@@ -1,34 +1,28 @@
 name: Test and Report
 
-on: [push]
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: "Проверка кода"
+        uses: actions/checkout@v3
 
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: '11'
 
-      - name: Run tests and create report
+      - name: "Запуск тестов"
         run: |
           mvn clean test
           ./allure/bin/allure generate target/allure-results --clean -o target/allure-report
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: allure-report
           path: target/allure-report
-          
-      - name: Publish to Allure Server
-        run: |
-          curl -X POST "https://your-allure-server/api/report" \
-               -H "Content-Type: multipart/form-data" \
-               -F "file=@target/allure-report.zip"
